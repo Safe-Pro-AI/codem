@@ -31,7 +31,10 @@ from codem.preprocessing.preprocess import instantiate
 from codem.registration import ApplyRegistration
 from codem.registration import DsmRegistration
 from codem.registration import IcpRegistration
-from distutils.util import strtobool
+try:
+    from distutils.util import strtobool
+except ModuleNotFoundError:
+    from setuptools._distutils.util import strtobool
 
 
 class DummyProgress(ContextDecorator):
