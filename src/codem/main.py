@@ -31,11 +31,14 @@ from codem.preprocessing.preprocess import instantiate
 from codem.registration import ApplyRegistration
 from codem.registration import DsmRegistration
 from codem.registration import IcpRegistration
-try:
-    from distutils.util import strtobool
-except ModuleNotFoundError:
-    from setuptools._distutils.util import strtobool
 
+def strtobool(val):
+    val = val.lower()
+    if val in ('y', 'yes', 't', 'true', 'on', '1'):
+        return True
+    if val in ('n', 'no', 'f', 'false', 'off', '0'):
+        return False
+    raise ValueError(f"invalid truth value {val!r}")
 
 class DummyProgress(ContextDecorator):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
